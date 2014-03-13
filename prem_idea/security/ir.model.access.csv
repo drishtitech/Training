@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_idea_idea_user,idea.idea.user,model_idea_idea,group_idea_user,1,1,1,0
+access_idea_vote_category_user,idea.vote.category.user,model_idea_vote_category,group_idea_user,1,1,1,1
+access_idea_category_user,idea.category.user,model_idea_category,group_idea_user,1,1,1,1
+access_idea_vote_user,ide.vote.user,model_idea_vote,group_idea_user,1,1,1,1
+access_idea_requirements_user,idea.requirements.user,model_idea_requirements,group_idea_user,1,1,1,1
+access_idea_requirements_in_detail_user,idea.requirements.in.detail.user,model_idea_requirements_in_detail,group_idea_user,1,1,1,1
+access_idea_idea_manager,idea.idea.manager,model_idea_idea,group_idea_manager,1,1,1,1
+
+
