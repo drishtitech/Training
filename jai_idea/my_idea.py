@@ -8,7 +8,7 @@ class idea_vote_category(osv.osv):
                 'information': fields.char('Information', size=64),
                 
             }   
-
+# This is a comment... Do not worry...
 class idea_vote(osv.osv):
     _name='idea.vote'
     _inherits={'idea.vote.category': "vote_id"} 
