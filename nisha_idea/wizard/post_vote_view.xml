@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+ 
+ 		<!-- Form view of idea vote post -->
+ 		<record id="view_idea_post_vote" model="ir.ui.view">
+ 			<field name="name">Idea Post Vote Form</field>
+ 			<field name="model">idea.post.vote</field>
+ 			<field name="arch" type="xml">
+ 				<form string="Give Vote" version="7.0">
+ 					<group>
+ 						<field name="vote" nolabel="1"/>
+ 						<separator/>
+ 						<field name="note" nolabel="1" placeholder="Any comments on the Vote?"/>	
+ 					</group>
+ 					<separator/>
+ 					<group>
+ 						<button icon="gtk-ok" name="do_vote" string="Post" type="object"/>
+ 						<separator/>
+ 						<button string='Cancel' class="oe_link" special="cancel"/>
+ 					</group>
+ 				</form>
+ 			</field>
+ 		</record>
+ 		
+ 		<!-- Activity to be performed on idea vote post -->
+ 		<record id="action_idea_post_vote" model="ir.actions.act_window">
+ 			<field name="name">Post Vote</field>
+ 			<field name="res_model">idea.post.vote</field>
+ 			<field name="view_type">form</field>
+ 			<field name="view_mode">form</field>
+ 			<field name="view_id" ref="view_idea_post_vote"/>
+ 			<field name="target">new</field>
+ 		</record>
+ 		
+ 		<!-- Form view of idea select -->
+ 		<record id="view_idea_select" model="ir.ui.view">
+ 			<field name="name">Idea Select Form</field>
+ 			<field name="model">idea.select</field>
+ 			<field name="arch" type="xml">
+ 				<form string="Select idea for vote" version="7.0">
+ 					<group>
+ 						<separator string="Select idea for vote"/>
+ 						<field name="idea_id"/>	
+ 					</group>
+ 					<separator/>
+ 					<group>
+ 						<button icon="gtk-ok-forward" name="open_vote_form" string="Next" type="object"/>
+ 						<separator/>
+ 						<button string="Close" class="oe_link" special="cancel"/>
+ 					</group>
+ 				</form>
+ 			</field>
+ 		</record>
+ 		
+ 		<!-- Activity to be performed on idea select -->
+ 		<record id="action_idea_select" model="ir.actions.act_window">
+ 			<field name="name">Idea Select</field>
+ 			<field name="res_model">idea.select</field>
+ 			<field name="view_type">form</field>
+ 			<field name="view_mode">form</field>
+ 			<field name="view_id" ref="view_idea_select"/>
+ 			<field name="target">new</field>
+ 			<field name="context">{'model':'idea.idea'}</field>
+ 		</record>
+ 		
+    </data>
+</openerp>
