@@ -5,7 +5,7 @@
 	string="Print Idea"
 	model='idea.idea'
 	name='idea.information'
-	rml='My_idea/report/idea_report.rml'
+	rml='Dhananjay_idea/report/idea_report.rml'
 	auto="False"
 	header="True"/>
 </data>

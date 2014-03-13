@@ -63,7 +63,7 @@ class idea_idea(osv.osv):
               'state':'new',
               'creator_id': lambda self,cr,uid,context:uid,
               'count':1,
-              'creation_date': time.strftime('%Y-%m-%d '),
+              'creation_date': time.strftime('%Y-%m-%d'),
               }
     _order='name'
     
