@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+ <data>
+	<!-- FORM view for post votes via button ((direct wizard))-->
+	<record id='view_idea_post_vote' model='ir.ui.view'>
+		<field name='name'>idea.post.vote.form</field>
+		<field name='model'>idea.post.vote</field>
+		<field name='arch' type='xml'>
+			<form string='Give VOTE' version='7.0'>
+				<group>
+					<field name='vote' nolabel='1'/>
+					<seperator/>
+					<field name='note' nolabel='1' placeholder='Any comments you want to give for this idea'/>
+					<seperator/>
+					<field name='info' nolabel='1' placeholder='Any information you have about this idea'/>
+				</group>
+				 <seperator/>
+				 <group>
+				 	<button name='do_vote' type='object' string='post' icon='gtk-ok'/>
+				 	 <seperator/>
+					<button string="Cancel" class="oe_link" special="cancel"/>
+				 </group>
+			</form>
+		</field>
+ 	</record>
+	
+	
+	<!-- FORM view for selecting idea & passed idea from one wizard to another wizard for voting((2 wizards))-->
+	<record id='view_idea_select' model='ir.ui.view'>
+		<field name='name'>idea.select.form</field>
+		<field name='model'>idea.select</field>
+		<field name='arch' type='xml'>
+			<form string='Select ieda for voting form' version='7.0'>
+				<group string="Select idea for voting">
+					<field name='idea_id' nolabel='1'/>
+					<seperator/>					
+				</group>
+				 <seperator/>
+				 <group>
+				 	<button name='open_vote_form' type='object' string='Next' icon='gtk-go-forward'/>
+				 	 <seperator/>
+					<button string="Close" class="oe_link" special="cancel"/>
+				 </group>
+			</form>
+		</field>
+ 	</record>
+	 
+	 <!-- Action for posting votes via button -->
+ 	<record id='action_idea_post_vote' model='ir.actions.act_window'>
+ 		<field name='name'>idea.post.vote.action</field>
+ 		<field name='res_model'>idea.post.vote</field>
+ 		<field name='view_type'>form</field>
+ 		<field name='view_mode'>form</field>
+ 		<field name='view_id' ref='view_idea_post_vote'/>
+ 		<field name='target'>new</field>
+	 </record>
+	 
+	 
+ 	<!-- Action for selecting idea & posting votes via button((2 wizards)) -->
+ 	<record id='action_idea_select' model='ir.actions.act_window'>
+ 		<field name='name'>idea.select.action</field>
+ 		<field name='res_model'>idea.select</field>
+ 		<field name='view_type'>form</field>
+ 		<field name='view_mode'>form</field>
+ 		<field name='view_id' ref='view_idea_select'/>
+ 		<field name='target'>new</field>
+ 		<field name='context'>{'model':'idea.idea'}</field>
+ 	</record>
+ 	
+ 	
+ 	
+ </data>
+</openerp>

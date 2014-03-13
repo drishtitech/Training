@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+ <openerp>
+  <data>
+  	<!-- first  REPORT -->
+  	<report id='report_idea_idea'
+  			string='Print idea'
+  			model='idea.idea'
+  			name='idea.information'
+  			rml='my_idea/report/my_idea_report.rml'
+  			auto='False'	
+  			header='True' />  <!-- auto=False means we dont want to use default parser --> 
+  			  
+  </data>
+ </openerp>

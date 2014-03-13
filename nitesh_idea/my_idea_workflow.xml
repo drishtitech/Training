@@ -1,0 +1,94 @@
+<openerp>
+  <data>
+	<!-- main WORKFLOW -->
+	<record id='wkf_idea' model='workflow'>
+		<field name='name'>idea.wkf.basic</field>
+		<field name='osv'>idea.idea</field>
+		<field name='on_create'>True</field>
+	</record>
+	
+	
+	<!-- workflow ACTIVITIES -->
+	<!-- NEW avtivity -->
+	<record id='act_new' model='workflow.activity'>
+		<field name='name'>new</field>
+		<field name='wkf_id' ref='wkf_idea'/>
+		<field name='flow_start'>True</field>
+	</record>
+	
+	<!-- OPEN activity -->
+	<record id='act_open' model='workflow.activity'>
+		<field name='name'>open</field>
+		<field name='wkf_id' ref='wkf_idea'/>
+		<field name='kind'>function</field>
+		<field name='action'>wkf_act_idea_opened()</field>
+	</record>
+	
+	<!-- ACCEPT activity -->
+	<record id='act_accept' model='workflow.activity'>
+		<field name='name'>accepted</field>
+		<field name='wkf_id' ref='wkf_idea'/>
+		<field name='kind'>function</field>
+		<field name='action'>wkf_act_idea_accepted()</field>
+		<field name='flow_stop' eval='False'/>
+	</record>
+		
+    <!-- REJECT activity -->
+    <record id='act_refuse' model='workflow.activity'>
+    	<field name='name'>refused</field>
+    	<field name='wkf_id' ref='wkf_idea'/>
+    	<field name='kind'>function</field>
+    	<field name='action'>wkf_act_idea_refused()</field>
+    	<field name='flow_stop' eval='False'/>
+    </record>
+  
+  
+  
+  
+  	  
+    <!-- TRANSITIONS -->
+    <!-- from new to open -->
+    <record id='trans_new_open' model='workflow.transition'>
+    	<field name='act_from' ref='act_new'/>
+    	<field name='act_to' ref='act_open'/>
+    	<field name='signal'>idea_open</field>
+    </record>
+    
+    <!-- from open to accepted -->
+	<record id='trans_open_accept' model='workflow.transition'>
+		<field name='act_from' ref='act_open'/>
+		<field name='act_to' ref='act_accept'/>
+		<field name='signal'>idea_accepted</field>
+	</record>  
+  
+    <!-- form open to refused -->
+    <record id='trans_open_refuse' model='workflow.transition'>
+    	<field name='act_from' ref='act_open'/>
+    	<field name='act_to' ref='act_refuse'/>
+    	<field name='signal'>idea_refused</field>    
+    </record>
+    
+    
+    
+  
+   
+ 
+ 	<!-- TRANSITIONS of re-opening-->  
+   <!-- from accepted to open -->
+   <record id='trans_accept_open' model='workflow.transition'>
+   	<field name='act_from' ref='act_accept'/>
+   	<field name='act_to' ref='act_open'/>
+   	<field name='signal'>idea_reopen</field>
+   </record>
+  
+   <!-- from refused to open -->
+    <record id='trans_refuse_open' model='workflow.transition'>
+   	<field name='act_from' ref='act_refuse'/>
+   	<field name='act_to' ref='act_open'/>
+   	<field name='signal'>idea_reopen1</field>
+   </record>
+  
+  
+  
+  </data>
+</openerp>
