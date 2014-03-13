@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <!-- Form View to Post For Current Idea -->
+    <record id="view_idea_post_vote" model="ir.ui.view">
+        <field name="name">idea.post.vote.form</field>
+        <field name="model">idea.post.vote</field>
+        <field name="arch" type="xml">
+            <form string="Give Vote" version="7.0">
+            <group>
+                <field name="vote" nolabel="1"/>
+                <separator/>
+                <field name="note" nolabel="1" placeholder="Any comment about your vote?"/>
+            </group>
+            <separator/>
+            <group>
+            <button icon="gt_ok" name="do_vote" string="Post" type="object"/>
+            <separator/>
+            <button string="cancel" class="oe_link" special="cancel"/>
+            </group>
+           </form>
+           </field>
+    </record>
+    
+    <!-- Action to be executed for wizard Form the idea.idea Form View's Button -->
+    <record id="action_idea_post_vote" model="ir.actions.act_window">
+        <field name="name">Post Vote</field>
+        <field name="res_model">idea.post.vote</field> 
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_idea_post_vote"/>
+        <field name="target">new</field>
+        </record>
+    </data>
+    </openerp>
