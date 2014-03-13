@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report
+			id="report_idea_idea"
+			string="yours idea"
+			model="my.idea"
+			name="idea.information"
+			rml="/home/drishti/7.0/addons/my_idea/report/idea_repot.rml"
+			auto="False" 
+			header="True"/>
+	</data>
+</openerp>
+			
