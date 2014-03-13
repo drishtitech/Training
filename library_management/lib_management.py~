@@ -1,0 +1,80 @@
+from openerp.osv import osv
+from openerp.osv import fields
+import time, datetime
+
+class book_user(osv.osv):
+    """ Book Register """
+    _name = "book.user"
+    _columns = {
+        'book_id': fields.many2one('book.book', 'Book', invisible=True),
+        'check_out': fields.date('Check Out'),
+        'comment': fields.text('Comments'),
+        'check_in': fields.date('Check In')
+    }
+    
+    _defaults = {
+        'out_date': lambda *a: time.strftime('%Y-%m-%d'),
+    }
+    
+class book_member(osv.osv):
+    """ Members """
+    _name = "book.member"
+    _inherits= {'book.user': "member_id"}
+    _columns = {
+        'name': fields.char('Member Name'),
+        'member_id': fields.many2one('book.user', 'Member', invisible=True),
+    }    
+
+   # def onchange_check_in_date(self, cr, uid, ids, out_date, context=None):
+        #res = {}
+        #for datechk in self.read(cr,uid,ids,['out_date'],context=context):
+    #        if book_user._columns.get(out_date, None):
+     #           Date = date.strftime('%Y-%m-%d', out_date)
+                #Date = time.strftime('%Y-%m-%d',out_date)
+      #          Date = book_user._columns.get(out_date, time.strftime('%Y-%m-%d'))
+       #         check_in = Date + date.timedelta(days=7)
+        #        check_in = check_in.strftime('%Y-%m-%d')
+         #   return {'value': {'check_in':check_in}}
+        
+class book_book(osv.osv):
+    """ Library Books """
+    _name = "book.book"
+    _inherit =['mail.thread', 'ir.needaction_mixin']
+      
+    def _book_availability(self,cr,uid,ids,name,arg,context=None):
+        if not ids:
+            return {}
+        res={}
+        book_use_obj=self.pool.get('book.user')
+        for use in self.browse(cr,uid,ids,context=context):
+             if use:
+                 
+                 book_out=book_use_obj.search(cr,uid,[('book_id','=', book.id)])
+                 res[book.id]=len(book_avail)
+             return res
+      
+    _columns = {
+        'name': fields.char('Book Name', required=True),
+        'category': fields.many2one('book.category', 'Category'),
+        'no_of_copies': fields.function(_book_availability, method=True, String="No Of Copies", type="integer"),
+        'available': fields.boolean('Availability'),
+        'user': fields.one2many('book.user', 'book_id', 'Member'),
+        'author': fields.char('Book Author'),
+        'publication': fields.char('Publication'),
+    }
+    _defaults = {
+        'no_of_copies': 0
+    }
+    
+    _order = 'name asc'
+    
+    _sql_constraints=[('name_author_unique','unique(name,author)','This book already exists !!')]
+        
+class book_category(osv.osv):
+    """ Book Category """
+    _name = "book.category"
+    _columns = {
+        'name': fields.char('Category Name'),
+        'parent_id': fields.many2one('book.category', 'Parent Category'),
+        'child_id': fields.one2many('book.category', 'parent_id', 'Child Category'),
+    }
