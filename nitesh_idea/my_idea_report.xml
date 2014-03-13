@@ -6,7 +6,7 @@
   			string='Print idea'
   			model='idea.idea'
   			name='idea.information'
-  			rml='my_idea/report/my_idea_report.rml'
+  			rml='nitesh_idea/report/my_idea_report.rml'
   			auto='False'	
   			header='True' />  <!-- auto=False means we dont want to use default parser --> 
   			  
