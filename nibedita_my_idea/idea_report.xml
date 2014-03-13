@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report  id="report_idea_idea"
+		string="Print Idea"
+		model="idea.idea"
+		name="idea.information"
+		rml="my_idea/report/report.rml"
+		auto="False"
+		header="True" />
+	</data>
+</openerp>

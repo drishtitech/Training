@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <record id="view_idea_post_vote" model="ir.ui.view">
+            <field name="name">idea.post.vote.form</field>
+            <field name="model">idea.post.vote</field>
+            <field name="arch" type="xml">
+                <form string="Give Vote" version="7.0">
+               <group>
+                  <field name='vote' nolabel="1"/>
+               <separator/>
+                   <field name='note' nolabel="1" placeholder="any comment about your vote"/>
+               </group>
+               <separator/>
+              <group>
+               <button icon="gtk-ok" name="do_vote" string="post" type="object"/>
+               <separator/>
+               <button string="cancel" class="oe_link" special="cancel"/>
+              </group>
+             </form>
+            </field>
+           </record>
+                
+                
+        <record id="view_idea_select" model="ir.ui.view">
+            <field name="name">idea.select.form</field>
+            <field name="model">idea.select</field>
+            <field name="arch" type="xml">
+                <form string="Select Idea for vote" version="7.0">
+               <group>
+              
+               <separator/>
+              <field name="idea_id"/>
+               <group>
+               <button icon="gtk-ok-forward" name="open_vote_form" string="next" type="object"/>
+               <separator/>
+               <button string="close" class="oe_link" special="cancel"/>
+               </group>        
+                
+         </group>       
+        </form>
+       </field>
+      </record> 
+      
+      
+      
+      
+      <record id="action_view_idea_post_vote" model="ir.actions.act_window">
+            <field name="name">post Vote</field>
+   
+            <field name="res_model">idea.post.vote</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_idea_post_vote"/>
+            <field name="target">new</field>
+           
+      </record>
+       
+      
+      <record id="action_idea_select" model="ir.actions.act_window">
+            <field name="name">Idea select</field>
+   
+            <field name="res_model">idea.select</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_idea_select"/>
+            <field name="target">new</field>
+            <field name="context">{'model':'idea.idea'}</field>
+            
+            
+        </record>
+       
+ </data>
+</openerp>
