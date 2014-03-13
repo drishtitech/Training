@@ -6,7 +6,7 @@
 			string="yours idea"
 			model="my.idea"
 			name="idea.information"
-			rml="/home/drishti/7.0/addons/my_idea/report/idea_repot.rml"
+			rml="/home/drishti/ERP/openerp-7.0/openerp/addons_training/prem_idea/report/idea_report.rml"
 			auto="False" 
 			header="True"/>
 	</data>
