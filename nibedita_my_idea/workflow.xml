@@ -1,0 +1,61 @@
+<openerp>
+	<data>
+		<record model="workflow" id='wkf_idea'>
+			<field name="name">idea.wkf.basic</field>
+			<field name="osv">idea.idea</field>
+			<field name="on_create">True</field>
+		</record>
+		<record model="workflow.activity" id='act_idea'>
+			<field name="wkf_id" ref="wkf_idea"/>
+			<field name="flow_start">True</field>
+			<field name="name">new</field>
+		</record>
+		<record model="workflow.activity" id='act_open'>
+			<field name="wkf_id" ref="wkf_idea"/>
+			<field name="name">open</field>
+			<field name="kind">function</field>
+			<field name="action">wkf_act_idea_opened()</field>
+			<field name="flow_stop" eval="False"/>
+			
+		</record>
+		<record model="workflow.activity" id='act_close'>
+			<field name="wkf_id" ref="wkf_idea"/>
+			<field name="name">accepted</field>
+			<field name="kind">function</field>
+			<field name="action">wkf_act_idea_accepted()</field>
+			<field name="flow_stop" eval="False"/>
+		</record>
+		<record model="workflow.activity" id='act_refuse'>
+			<field name="wkf_id" ref="wkf_idea"/>
+			<field name="name">refuse</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'cancel'})</field>
+			<field name="flow_stop" eval="False"/>
+		</record>
+		<record model="workflow.transition" id='trans_new_open'>
+			<field name="act_from" ref="act_idea"/>
+			<field name="act_to" ref="act_open"/>
+			<field name="signal">idea_open</field>
+		</record>
+		<record model="workflow.transition" id='trans_open_close'>
+			<field name="act_from" ref="act_open"/>
+			<field name="act_to" ref="act_close"/>
+			<field name="signal">idea_close</field>
+		</record>
+		<record model="workflow.transition" id='trans_open_refuse'>
+			<field name="act_from" ref="act_open"/>
+			<field name="act_to" ref="act_refuse"/>
+			<field name="signal">idea_refuse</field>
+		</record>
+		<record model="workflow.transition" id='trans_reopen_cancelling'>
+			<field name="act_from" ref="act_refuse"/>
+			<field name="act_to" ref="act_open"/>
+			<field name="signal">idea_reopen_cancelling</field>
+		</record>
+		<record model="workflow.transition" id='trans_reopen_closing'>
+			<field name="act_from" ref="act_close"/>
+			<field name="act_to" ref="act_open"/>
+			<field name="signal">idea_reopen_closing</field>
+		</record>
+	</data>
+</openerp>
