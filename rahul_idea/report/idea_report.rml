@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<document filename="test.pdf">
+  <template pageSize="(612.0,792.0)" title="Test" author="Martin Simon" allowSplitting="20">
+    <pageTemplate id="first">
+      <frame id="first" x1="57.0" y1="57.0" width="498" height="678"/>
+    </pageTemplate>
+  </template>
+  <stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table1">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,1" stop="1,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,1" stop="2,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,1" stop="2,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table2">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table3">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+    </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+    </initialize>
+    <paraStyle name="P1" fontName="Helvetica-Bold" fontSize="10.0" leading="13" alignment="CENTER"/>
+    <paraStyle name="P2" fontName="Helvetica"/>
+    <paraStyle name="P3" fontName="Helvetica"/>
+    <paraStyle name="P4" fontName="Helvetica" fontSize="12.0" leading="15"/>
+    <paraStyle name="P5" fontName="Helvetica" fontSize="12.0" leading="15"/>
+    <paraStyle name="P6" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P7" fontName="Helvetica" fontSize="10.0" leading="13" alignment="RIGHT"/>
+    <paraStyle name="P8" fontName="Helvetica" alignment="CENTER"/>
+    <paraStyle name="P9" fontName="Helvetica" alignment="CENTER"/>
+    <paraStyle name="P10" fontName="Helvetica" alignment="CENTER"/>
+    <paraStyle name="P11" fontName="Helvetica-Bold" fontSize="10.0" leading="13" alignment="CENTER"/>
+    <paraStyle name="P12" fontName="Helvetica" fontSize="12.0" leading="15"/>
+    <paraStyle name="Standard" fontName="Helvetica"/>
+    <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="Text body" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="List" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="Caption" fontName="Helvetica" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="Index" fontName="Helvetica"/>
+    <paraStyle name="Table Contents" fontName="Helvetica"/>
+    <images/>
+  </stylesheet>
+  <story>
+    <section>
+      <para style="P2">[[ repeatIn(objects,'o') ]]</para>
+      <para style="P2">
+        <font color="white"> </font>
+      </para>
+      <para style="Standard">
+        <font face="Helvetica"/>
+        <font face="Helvetica">Idea Information</font>
+      </para>
+      <para style="P2">
+        <font color="white"> </font>
+      </para>
+      <section>
+        <para style="Standard">
+          <font color="white"> </font>
+        </para>
+        <para style="Standard">
+          <font face="Helvetica">Idea: </font>
+          <font face="Helvetica">[[ o.name ]]</font>
+        </para>
+        <para style="P2">
+          <font color="white"> </font>
+        </para>
+        <blockTable colWidths="166.0,166.0,166.0" style="Table1">
+          <tr>
+            <td>
+              <para style="P1">Creator</para>
+            </td>
+            <td>
+              <para style="P1">Created Date</para>
+            </td>
+            <td>
+              <para style="P1">Category</para>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <para style="P8">[[ o.creator_id.name ]]</para>
+            </td>
+            <td>
+              <para style="P9">[[ o.creation_date ]]</para>
+            </td>
+            <td>
+              <para style="P10">[[ o.category_id.name ]]</para>
+            </td>
+          </tr>
+        </blockTable>
+        <para style="P2">
+          <font color="white"> </font>
+        </para>
+        <para style="Standard">
+          <font color="white"> </font>
+        </para>
+        <para style="P3">
+          <font color="white"> </font>
+        </para>
+        <blockTable colWidths="166.0,166.0,166.0" style="Table2">
+          <tr>
+            <td>
+              <para style="P1">Comments</para>
+            </td>
+            <td>
+              <para style="P1">User</para>
+            </td>
+            <td>
+              <para style="P1">Vote value</para>
+            </td>
+          </tr>
+        </blockTable>
+        <para style="P3">
+          <font color="white"> </font>
+        </para>
+        <section>
+          <para style="P5">
+            <font face="Helvetica">[[ repeatIn(get_details(o.vote_ids),'v') ]]</font>
+          </para>
+          <section>
+            <para style="P6">
+              <font color="white"> </font>
+            </para>
+            <blockTable colWidths="166.0,166.0,166.0" style="Table3">
+              <tr>
+                <td>
+                  <para style="P12">
+                    <font face="Helvetica">[[ v['comment'] ]]</font>
+                  </para>
+                </td>
+                <td>
+                  <para style="P12">
+                    <font face="Helvetica">[[ v['user'] ]]</font>
+                  </para>
+                </td>
+                <td>
+                  <para style="P12">
+                    <font face="Helvetica">[[ v['value'] ]]</font>
+                  </para>
+                </td>
+              </tr>
+            </blockTable>
+            <para style="P6">
+              <font color="white"> </font>
+            </para>
+          </section>
+          <para style="P4">
+            <font color="white"> </font>
+          </para>
+          <para style="P3">
+            <font color="white"> </font>
+          </para>
+        </section>
+        <para style="P3">
+          <font color="white"> </font>
+        </para>
+        <para style="P7"><font face="Helvetica-Bold">Total</font> : [[ get_total() ]]</para>
+        <para style="P3">
+          <font color="white"> </font>
+        </para>
+      </section>
+      <para style="P2">
+        <font color="white"> </font>
+      </para>
+      <para style="Standard">
+        <font color="white"> </font>
+      </para>
+      <para style="Standard">
+        <font color="white"> </font>
+      </para>
+      <para style="Standard">
+        <font color="white"> </font>
+      </para>
+      <para style="Standard">
+        <font color="white"> </font>
+      </para>
+    </section>
+    <para style="P2">
+      <font color="white"> </font>
+    </para>
+  </story>
+</document>
+
