@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+    <menuitem id="main_menu_idea_idea" name="Idea Application" sequence="1"/>
+    <menuitem id="sub_menu_idea_idea1" name="Ideas" sequence="1" parent="main_menu_idea_idea"/>
+  
+       		<!--  Tree view of idea.idea model -->
+           <record id="view_idea_idea_tree" model="ir.ui.view">
+            <field name="name">idea.idea.tree</field>
+            <field name="model">idea.idea</field>
+            <field name="arch" type="xml">
+                <tree string="Idea" colors="grey:state=='close';red:state=='cancel';blue:state in ('open')">
+                  		 <field name="name"/>
+                  		 <field name="category_id"/>
+                  		 <field name="user_id"/>
+                 		<field name="creation_date"/>
+                 		<field name="open_datetime"/>
+                 		<field name="close_datetime"/>
+                 		<field name="state"/>
+                    	
+                </tree>
+            </field>
+        </record>
+        
+        	<!--  Form view of idea.vote model -->
+          <record id="view_idea_vote_form" model="ir.ui.view">
+            <field name="name">idea.vote.from</field>
+            <field name="model">idea.vote</field>
+            <field name="arch" type="xml">
+                <form string="Idea" version="7.0">
+               
+                <group>
+                 	<group col="6" colspan="2" >
+                 		<field name="user_id"/>
+                 		<field name="posted_date"/>
+                    	<field name="information" />
+                 	</group>
+                 	</group>
+                 	<group string="Comments">
+                 		<field name="comment" />
+                 	</group>
+                 
+                 </form>
+            </field>
+        </record>   
+        
+      
+        
+    	<!--  Form view of idea.idea model -->
+          <record id="view_idea_idea_form" model="ir.ui.view">
+            <field name="name">idea.idea.form</field>
+            <field name="model">idea.idea</field>
+            <field name="arch" type="xml">
+                <form string="Idea" version="7.0">
+					<header>
+							<button name="idea_open" states="new" string="Open Idea for Voting" class="oe.highlight"/>
+							<button name="idea_close" states="open" string="Accept Idea" class="oe.highlight"/>
+							<button name="idea_refuse" states="open" string="Reject Idea" class="oe.highlight"/>
+							<button name="idea_open" states="cancel" string="Reopen Idea" class="oe.highlight"/>
+							
+		                	<field name="state" widget="statusbar"/>
+		            </header>	               
+	               <sheet>
+		               <h1>
+		            	   <field name="name"/>
+		             	   <field name="requirement_id" placeholder="enter the requirments that u need.." widget="many2many_tags"/>
+		               </h1>
+		               <group>  
+		                    <group>
+		                 		<field name="creation_date"/>
+		                    	<field name="category_id" on_change="on_change_category(category_id)" placeholder="select the category..." />
+		                   		<field name="count"/>	
+		                   </group>
+		               <group>
+		                    <field name="user_id"/>
+		                    <field name="open_datetime"/>
+                 		<field name="close_datetime"/>
+		               </group>
+	                   </group> 
+	                   
+		               <notebook>
+		                   <page string="votes">
+		                   	<group>
+		                   		<group>
+		                   		<field name="count_votes"/>
+		                   		</group>
+		                   		<group>
+	                   				<button name="%(action_idea_post_vote)d" type="action" string="Post Vote"/>
+	                   			</group>
+	                   		</group>
+		                       <field name="voter_id" nolabel="1" string="Vote">
+		                       		<tree string="Vote List">
+	                    				<field name="user_id"/>
+	                    			<!--	<field name="idea_id"/> -->
+	                    				<field name="posted_date"/>
+	                    				<field name="decision" string="decision"/>
+	                   				    <field name="comment"/>
+	                   				  
+	                   				    
+	                 				</tree>
+	                    		</field>
+	                    		
+	                   		 </page>
+	                   		
+	                       	 <page string="other info">	
+	                       	 <group>
+	                       	 	<group>
+	                       	 		<field name="parent_idea_category_id"/>
+	                   		  		<field name="count_votes"/>
+	                   		  		<field name="email"/>
+	                   		 	</group>
+	                  			
+	                  			<group>
+	                  				<field name="is_open"/>
+	                  				
+	                  			</group>
+	                  		</group>
+		                   	 </page>
+		                   	 
+		                   	 <page string="description">
+		                   	 	<field name="description"/>
+		                   	 </page>
+		               </notebook>
+                   </sheet>
+                </form>
+            </field>
+        </record>   
+        
+     <!-- View Inheritance     -->
+            <record id="view_idea_idea_form_inherit" model="ir.ui.view">
+            <field name="name">idea.idea.form.inherit</field>
+            <field name="model">idea.idea</field>
+            <field name="inherit_id" ref="view_idea_idea_form"/>
+            <field name="arch" type="xml">
+         		<field name="count" position="replace"/>
+         		<xpath expr="//field[@name='user_id']" position="after">
+         			<field name="vote_limit"/>
+         		</xpath>
+         		<xpath expr="//field[@name='is_open']" position="after">
+         			<field name="parent_idea_category_id"/>
+         		</xpath>
+         		</field>
+         		</record>
+     
+         		     
+      
+       		<!-- form view of idea.requirements -->
+            <record id="view_idea_requirements_form" model="ir.ui.view">
+            <field name="name">idea.requirements.form</field>
+            <field name="model">idea.requirements</field>
+            <field name="arch" type="xml">
+                <form string="Hello">
+                    
+                    <field name="name"/>
+                                   
+                </form>
+            </field>
+       		</record>
+       		
+      
+       		
+      		
+
+                
+       		
+       		<!-- Search View for idea.idea model-->
+       		<record model="ir.ui.view" id="view_idea_idea_filter">
+         	   <field name="name">idea.idea.select</field>
+            	<field name="model">idea.idea</field>
+               <field name="arch" type="xml">
+               		<search string="Search Ideas">
+               			<filter string="New" domain="[('state','=','new')]" help="New Ideas" />
+               			<filter string="Accepted" domain="[('state','=','close')]" help="Accepted Ideas"/>
+               				<filter string="My Ideas" domain="[('user_id','=',uid)]" help="Ideas created by me" name="my_idea_filter"/>
+               				<field name="name"/>
+               				<field name="description"/>
+               				<field name="user_id"/>
+               				<field name="category_id"/>
+               				<group string="Group By..">
+               					<filter string="Creator" icon="terp-personal" context="{'group_by':'user_id'}"/>
+               					<filter string="Category" context="{'group_by':'category_id'}"/>
+               				</group>
+               		
+               		</search>
+            
+            </field>
+            </record>        		
+   
+        	<!--  kanban view of idea.idea model -->
+       <record model="ir.ui.view" id="view_idea_idea_kanban">
+            <field name="name">idea.idea.kanabn</field>
+            <field name="model">idea.idea</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="description" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('idea.idea', 'image', record.id.value)" />
+                                </a>
+                             <div class="oe_product_desc">
+                                  <h4>
+                                      <a type="edit">
+                                          <field name="name"></field>
+                                      </a>
+                                  </h4>
+                                    <ul>
+                                        <li><field name="name"/></li>
+                                        <li> <field name="description"/></li>
+                                    </ul>
+                              </div>
+                            </div>
+                      </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+      	<!--  Calendar view of idea.idea model -->
+ 	<record model="ir.ui.view" id="view_idea_idea_calendar">
+            <field name="name">idea.idea.calendar</field>
+            <field name="model">idea.idea</field>
+
+            <field name="arch" type="xml">
+            	<calendar string="Idea" color="user_id" date_start="creation_date">
+            		<field name="name"/>
+           		</calendar>
+       		</field>
+    </record>
+    
+    	<!-- Graph view of idea.idea model -->
+    <record model="ir.ui.view" id="view_idea_idea_graph">
+            <field name="name">idea.idea.graph</field>
+            <field name="model">idea.idea</field>
+
+            <field name="arch" type="xml">
+            	<graph string="Idea Graph" type="bar">
+    				<field name="name"/>        	
+            		<field name="count"/>
+            		</graph>
+           
+       		</field>
+    </record>
+    
+           		<!--form view of idea.category model -->
+       		<record id="view_idea_category_form" model="ir.ui.view">
+            <field name="name">idea.category.form</field>
+            <field name="model">idea.category</field>
+             <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Idea">
+                  
+                    <field name="name"/>
+                     <field name="parent_id"/>          
+                </form>
+            </field>
+       		</record>
+       		
+       		 		<!-- tree view of idea.category model -->
+       			<record id="view_idea_category_tree" model="ir.ui.view">
+            <field name="name">idea.category.form</field>
+            <field name="model">idea.category</field>
+             <field name="field_parent">child_ids</field>
+            <field name="arch" type="xml">
+                <tree string="Category of idea" toolbar="1">
+                	<field name="name"/>
+                	<field name="parent_id" invisible='0' />
+                </tree>
+                
+        
+                </field>
+                </record>
+                
+                <!--  action for idea.category model -->
+          <record id="action_view_idea_category_tree" model="ir.actions.act_window">
+            <field name="name">Ideas by category</field>
+            <field name="res_model">idea.category</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree,form</field>
+            	<field name="domain">[('parent_id','=',False)]</field>
+        	</record>
+        
+        <!-- menu to xecute above action in order to open the tree view of idea.category model -->
+        <menuitem 
+			id="menu_action_view_idea_category_tree"
+			action="action_view_idea_category_tree"
+			name="Category"
+			parent="sub_menu_idea_idea1"/>  
+			
+			<!-- menu to open wizard -->
+		<menuitem
+			name="give your vote"
+			parent="sub_menu_idea_idea1"
+			id="menu_give_your_vote"
+			action="action_idea_select"/>		
+
+         
+        	<!--  Action for idea.idea model-->
+        <record id="action_view_idea_idea" model="ir.actions.act_window">
+            <field name="name">Ideas</field>
+            <field name="res_model">idea.idea</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar,graph</field>
+        </record>
+        
+     <menuitem id="sub_menu_idea_idea2" name="Create Idea" sequence="1" parent="sub_menu_idea_idea1" action="action_view_idea_idea"/>
+    
+    
+   
+    </data>
+</openerp>
+ 
