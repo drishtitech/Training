@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+	
+	<!-- Book Tree View -->
+        <record model="ir.ui.view" id="view_book_tree">
+            <field name="name">Book Tree View</field>
+            <field name="model">book.book</field>
+            <field name="field_parent"></field>
+            <field name="arch" type="xml">
+                <tree string="Books">
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="available"/>
+                </tree>
+            </field>
+        </record>
+	
+	<!-- Book Form View -->
+        <record model="ir.ui.view" id="view_book_form">
+            <field name="name">Book Form View</field>
+            <field name="model">book.book</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Books" version="7.0">
+                	<sheet>
+                		<h1>
+                			<field name="name" placeholder="Book Name"/>
+                		</h1>
+                		<group col="6" colspan="2">
+                    		<field name="category"/>
+                    		<field name="no_of_copies"/>
+                    		<field name="available"/>
+                    	</group>
+                    	<notebook>
+                    		<page string="Book Details" nolabel="1">
+                    			<group colspan="2">
+                    				<field name="author"/>
+                    				<field name="publication"/>
+                    			</group>
+                    		</page>
+                    		<page string="Members" nolabel="1">
+                    			<field name="user" nolabel="1" mode="tree">
+                					<tree string="Book User">
+                						<field name="name"/>
+                    					<field name="check_out"/>
+                    					<field name="check_in"/>
+                    				</tree>
+                    				<form string="Users" version="7.0">
+                    					<group col="6" colspan="2">
+                    						<field name="name"/>
+                    						<field name="check_out"/>
+                    						<field name="check_in"/>
+                    					</group>
+                    					<newline/>
+                    					<group string="Comments">
+                    						<field name="comment" nolabel="1"/>
+                    					</group>
+                    				</form>
+                				</field>
+                    		</page>
+                    	</notebook>
+                   	</sheet>
+                </form>
+            </field>
+        </record>
+	
+	<!-- Book Search View-->
+    	<record model="ir.ui.view" id="view_book_search">
+        	<field name="name">Book Search View</field>
+        	<field name="model">book.book</field>
+        	<field name="arch" type="xml">
+            	<search string=" Search Books">
+                	<filter string="Available" domain="[('available','=', 'True')]" help="Available Books"/>
+                	<field name="name"/>
+                	<field name="category"/>
+                	<group expand="0" string="Group By...">
+                		<filter string="Author" context="{'group_by':'author'}"/>
+                    	<filter string="Category" context="{'group_by':'category'}"/>
+                	</group>
+            	</search>
+       		</field>
+       </record>
+    
+    <!-- Book Graph View-->
+       <record model="ir.ui.view" id="view_book_graph">
+            <field name="name">Book Graph View</field>
+            <field name="model">book.book</field>
+            <field name="arch" type="xml">
+                <graph string="Book Data" type="bar">
+                    <field name="name" operator="+"/>
+                    <field name="no_of_copies" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+	 <!-- Book Action -->
+		<record model="ir.actions.act_window" id="action_book">
+        	<field name="name">Create Book</field>
+        	<field name="res_model">book.book</field>
+	        <field name="view_type">form</field>
+    	    <field name="view_mode">tree,form,graph</field>
+   		</record>
+    
+    <!-- Book Category Form View -->
+        <record model="ir.ui.view" id="view_book_category_form">
+            <field name="name">Book Category Form View</field>
+            <field name="model">book.category</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Book Category">
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                </form>
+            </field>
+        </record>
+
+	<!-- Book Category Tree View -->
+        <record model="ir.ui.view" id="view_book_category_tree">
+            <field name="name">Book Category Tree View</field>
+            <field name="model">book.category</field>
+            <field name="field_parent">child_id</field>
+            <field name="arch" type="xml">
+                <tree string="Book Category" >
+                    <field name="name"/>
+                    <field name="parent_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+	<!-- Book Category Action -->
+		<record model="ir.actions.act_window" id="action_book_category">
+        	<field name="name">Book Category</field>
+        	<field name="res_model">book.category</field>
+	        <field name="view_type">tree</field>
+    	    <field name="view_mode">tree,form</field>
+   		</record>
+     
+	<!-- Main Menu -->
+        <menuitem name="Library" id="library_main"/>
+    <!-- Main Menu item -->
+		<menuitem name="Library Management" parent="library_main" id="library_main_item"/>
+	<!-- Main Menu Create items -->
+		<menuitem name="Book" parent="library_main_item" id="library_main_item_create" action="action_book"/>
+		<menuitem name="Book Category" parent="library_main_item" id="library_main_category_create" action="action_book_category"/>
+	
+	</data>
+</openerp>

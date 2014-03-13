@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+ 
+ 		<!-- Workflow Definition -->
+ 		<record model="workflow" id="wkf_idea">
+ 			<field name="name">Idea Workflow</field>
+ 			<field name="osv">idea.idea</field>
+ 			<field name="on_create">True</field>
+ 		</record>
+ 		
+ 		<!-- Workflow Activity Definition -->
+ 		<record model="workflow.activity" id="act_new">
+ 			<field name="wkf_id" ref="wkf_idea"/>
+ 			<field name="flow_start">True</field>
+ 			<field name="name">new</field>
+ 		</record>
+ 		
+ 		<record model="workflow.activity" id="act_open">
+ 			<field name="wkf_id" ref="wkf_idea"/>
+ 			<field name="name">open</field>
+ 			<field name="kind">function</field>
+ 			<field name="action">wkf_act_idea_opened()</field>
+ 		</record>
+ 		
+ 		<record model="workflow.activity" id="act_close">
+ 			<field name="wkf_id" ref="wkf_idea"/>
+ 			<field name="name">close</field>
+ 			<field name="kind">function</field>
+ 			<field name="action">wkf_act_idea_accepted()</field>
+ 			<field name="flow_stop" eval="False"/>
+ 		</record>
+ 			
+ 		<record model="workflow.activity" id="act_refuse">
+ 			<field name="wkf_id" ref="wkf_idea"/>
+ 			<field name="name">cancel</field>
+ 			<field name="kind">function</field>
+ 			<field name="action">write({'state':'cancel','opened':False})</field>
+ 			<field name="flow_stop" eval="False"/>
+ 		</record>
+ 		
+ 		<!-- Workflow Transition Definition -->
+ 		<record model="workflow.transition" id="trans_new_opened">
+ 			<field name="act_from" ref="act_new"/>
+ 			<field name="act_to" ref="act_open"/>
+ 			<field name="signal">idea_open</field>
+ 		</record>
+ 		
+ 		<record model="workflow.transition" id="trans_open_close">
+ 			<field name="act_from" ref="act_open"/>
+ 			<field name="act_to" ref="act_close"/>
+ 			<field name="signal">idea_close</field>
+ 		</record>
+ 		
+ 		<record model="workflow.transition" id="trans_open_refuse">
+ 			<field name="act_from" ref="act_open"/>
+ 			<field name="act_to" ref="act_refuse"/>
+ 			<field name="signal">idea_refuse</field>
+ 		</record>
+ 		
+ 		<record model="workflow.transition" id="trans_refuse_reopen">
+ 			<field name="act_from" ref="act_refuse"/>
+ 			<field name="act_to" ref="act_open"/>
+ 			<field name="signal">idea_reopen</field>
+ 		</record>
+ 		
+ 		<record model="workflow.transition" id="trans_close_reopen">
+ 			<field name="act_from" ref="act_close"/>
+ 			<field name="act_to" ref="act_open"/>
+ 			<field name="signal">idea_reopen</field>
+ 		</record>
+ 		
+    </data>
+</openerp>

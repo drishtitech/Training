@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+ 
+ 		<!-- View for Idea report -->
+ 		<report
+ 			id="report_idea_idea"
+ 			string="Print Idea"
+ 			model="idea.idea"
+ 			name="idea.information"
+ 			rml="nisha_idea/reports/idea_report.rml"
+ 			auto="False"
+ 			header="True"/>
+ 	
+    </data>
+</openerp>
