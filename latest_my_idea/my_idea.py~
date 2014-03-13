@@ -1,8 +1,0 @@
-from openerp.osv import fields,osv
-class my_idea(osv.osv):
-    _name="my.idea"
-    _columns={
-     'name':fields.char("Name",size=128,required=True),
-     'code':fields.char("Code",size=64),
-     'image':fields.binary("Image")
-     }
