@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<record id="cast_vote_form_view" model="ir.ui.view">
+			<field name="name">cast.vote.form.view</field>
+			<field name="model">cast.vote</field>
+			<field name="arch" type="xml">
+				<form string="Vote" version="7.0">
+					<group>
+						<field name="votes"/>
+						<field name="comment"/>
+						<field name="info"/>				
+					</group>
+					<seperator/>
+					<group>
+						<button icon="gtk-ok" name="do_vote" type="object" string="Cast vote"/>	
+						<seperator/>				
+						<button string="Cancel" class="oe_link" special="cancel"/>
+					</group>
+				</form>
+			</field>
+		</record>
+		
+		<!-- Action for casting vote -->
+		<record id="action_cast_vote" model="ir.actions.act_window">
+			<field name="name">Voting Form</field>
+			<field name="res_model">cast.vote</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="cast_vote_form_view"/>
+			<field name="target">new</field>
+		</record>
+		
+		<!-- Form view for selecting idea -->
+		<record id="select_idea_form_view" model="ir.ui.view">
+			<field name="name">select.idea.form.view</field>
+			<field name="model">select.idea</field>
+			<field name="arch" type="xml">
+				<form string="view" version="7.0">
+					<group>
+						<field name="idea_id"/>
+					</group>
+					<seperator/>
+					<group>
+						<button icon="gtk-go-forward" string="Next" name="open_select_form" type="object"/>
+						<seperator/>
+						<button string="Cancel" class="oe_link" special="cancel"/>
+					</group>
+				</form>
+			</field>
+		</record>
+		
+		<!-- Action for moving to next wizard -->
+		<record id="action_on_select_idea" model="ir.actions.act_window">
+			<field name="name">Select idea for voting</field>
+			<field name="res_model">select.idea</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="select_idea_form_view"/>
+			<field name="target">new</field>
+			<field name="context">{'model':'my.idea'}</field>
+		</record>
+	</data>
+</openerp>
