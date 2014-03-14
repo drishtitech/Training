@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report
+			id="rahul_sims_report"
+			string="Print report"
+			model="student.student"
+			name="student.information"
+			rml="rahul_SIMS/report/sims_report.rml"
+			auto="False"
+			header="True"/>			
+	</data>
+</openerp>
