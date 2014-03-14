@@ -37,7 +37,7 @@ class select_idea(osv.osv_memory):
             context = {}
         current_idea_id=self.browse(cr,uid,ids,context=context)[0].idea_id.id
         data_obj = self.pool.get('ir.model.data')
-        db_id=data_obj._get_id(cr,uid,'my_idea','cast_vote_form_view')
+        db_id=data_obj._get_id(cr,uid,'rahul_idea','cast_vote_form_view')
         if db_id:
             view_id=data_obj.browse(cr,uid,db_id,context=context).res_id
             print 'View ID: ',view_id
