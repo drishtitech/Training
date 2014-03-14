@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<openerp>
+  <data>
+	<!-- main WORKFLOW -->
+	<record id='wkf_student' model='workflow'>
+		<field name='name'>student.wkf.basic</field>
+		<field name='osv'>student.student</field>
+		<field name='on_create'>True</field>
+	</record>
+	
+	
+	<!-- workflow ACTIVITIES -->
+	<!-- SEM 1 avtivity -->
+	<record id='act_sem1' model='workflow.activity'>
+		<field name='name'>sem1</field>
+		<field name='wkf_id' ref='wkf_student'/>
+		<field name='flow_start'>True</field>
+	</record>
+	
+	<!-- Sem 2 activity -->
+	<record id='act_sem2' model='workflow.activity'>
+		<field name='name'>sem2</field>
+		<field name='wkf_id' ref='wkf_student'/>
+		<field name='kind'>function</field>
+		<field name='action'>wkf_act_sem2()</field>
+	</record>
+	
+	<!-- ACCEPT activity -->
+	<record id='act_sem3' model='workflow.activity'>
+		<field name='name'>sem3</field>
+		<field name='wkf_id' ref='wkf_student'/>
+		<field name='kind'>function</field>
+		<field name='action'>wkf_act_sem3()</field>
+		<field name='flow_stop' eval='False'/>
+	</record>
+		
+    <!-- REJECT activity -->
+    <record id='act_sem4' model='workflow.activity'>
+    	<field name='name'>sem4</field>
+    	<field name='wkf_id' ref='wkf_student'/>
+    	<field name='kind'>function</field>
+    	<field name='action'>wkf_act_sem4()</field>
+    	<field name='flow_stop' eval='False'/>
+    </record>
+  
+  
+  
+  
+  	  
+    <!-- TRANSITIONS -->
+    <!-- from sem1 to sem2 -->
+    <record id='trans_sem1_sem2' model='workflow.transition'>
+    	<field name='act_from' ref='act_sem1'/>
+    	<field name='act_to' ref='act_sem2'/>
+    	<field name='signal'>student_sem2</field>
+    </record>
+    
+    <!-- from sem2 to sem3 -->
+	<record id='trans_sem2_sem3' model='workflow.transition'>
+		<field name='act_from' ref='act_sem2'/>
+		<field name='act_to' ref='act_sem3'/>
+		<field name='signal'>student_sem3</field>
+	</record>  
+  
+    <!-- form sem3 to sem4 -->
+    <record id='trans_sem3_sem4' model='workflow.transition'>
+    	<field name='act_from' ref='act_sem3'/>
+    	<field name='act_to' ref='act_sem4'/>
+    	<field name='signal'>student_sem4</field>    
+    </record>
+    
+   </data>
+   </openerp>
+    
