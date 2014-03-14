@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+ 
+ 	<!-- Student Tree View -->
+        <record model="ir.ui.view" id="view_student_student_tree">
+            <field name="name">Student Tree View</field>
+            <field name="model">student.student</field>
+            <field name="field_parent"></field>
+            <field name="arch" type="xml">
+                <tree string="Student">
+                    <field name="name"/>
+                    <field name="rollno"/>
+                    <field name="admission_date"/>
+                </tree>
+            </field>
+        </record>
+ 
+	<!-- Student Form View -->
+        <record model="ir.ui.view" id="view_student_student_form">
+            <field name="name">Student Form View</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <form string="Student" version="7.0">
+                	<header>
+                		<field name="semester" widget="statusbar"/>
+                	</header>
+                	<sheet>
+                		<h1>
+                			<field name="name" placeholder="Student Name"/>
+                		</h1>
+                		<group col="4" colspan="2"> 
+                			<field name="rollno"/>	
+                			<field name="gender"/>
+                			<field name="birth_date"/>  
+                			<field name="admission_date"/> 
+                			<field name="age"/>
+                			<field name="semester"/>
+                		</group>
+                		<notebook>
+                			<page string="Remarks" nolabel="1">
+                				<field name="remarks"/>
+                			</page>
+                			<page string="Marksheet" nolabel="1">
+                				<group col="2" colspan="2">
+                					<button name="%(action_student_marks_post)d" type="action" string="Insert Marksheet"/>
+                				</group>
+                				<field name="stud_marks" nolabel="1" mode="tree">
+                					<tree string="Student">
+                						<field name="name"/>
+                    					<field name="marksheet_dt"/>
+                    					<field name="sub1"/>
+                    					<field name="sub2"/>
+                    					<field name="sub3"/>
+        								<field name="comment"/>
+                    				</tree>
+                    				<form string="Marksheet" version="7.0">
+                    					<group col="6" colspan="2">
+                    						<field name="name"/>
+                    						<field name="marksheet_dt"/>
+                    						<field name="sub1"/>
+                    						<field name="sub2"/>
+                    						<field name="sub3"/>
+        								</group>
+                    					<newline/>
+                    					<group string="Comments">
+                    						<field name="comment" nolabel="1"/>
+                    					</group>
+                    				</form>
+                				</field>
+                			</page>
+                		</notebook>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+
+	 <!-- Student Search View -->
+    	<record model="ir.ui.view" id="view_student_student_search">
+        	<field name="name">Student Search View</field>
+        	<field name="model">student.student</field>
+        	<field name="arch" type="xml">
+            	<search string="Search Student">
+            		<filter string="1st Semester" domain="[('semester','=', 'sem1')]" help="Students in 1st Semester"/>
+                	<filter string="2nd Semester" domain="[('semester','=', 'sem2')]" help="Students in 2nd Semester"/>
+                	<filter string="3rd Semester" domain="[('semester','=', 'sem3')]" help="Students in 3rd Semester"/>
+                	<filter string="4th Semester" domain="[('semester','=', 'sem4')]" help="Students in 4th Semester"/>
+                	<field name="name"/>
+                	<field name="rollno"/>
+                	<field name="gender"/>
+                	<field name="birth_date"/>
+                	<field name="admission_date"/>
+                	<group expand="0" string="Group By...">
+                		<filter string="Gender" context="{'group_by':'gender'}"/>
+                    	<filter string="Admission Date" context="{'group_by':'admission_date'}"/>
+                	</group>
+            	</search>
+       		</field>
+       </record>
+    
+    <!-- Student Graph View
+       <record model="ir.ui.view" id="view_student_student_graph">
+            <field name="name">Student Graph View</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <graph string="Student Data" type="bar">
+                    <field name="name" operator="+"/>
+                    <field name="sub1" operator="+"/>
+                </graph>
+            </field>
+        </record> -->
+
+	 <!-- Student Calendar View -->
+		<record model="ir.ui.view" id="view_student_student_calendar">
+            <field name="name">Student Calendar View</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <calendar color="name" date_start="birth_date" string="Birth Date">
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+	
+	<!-- Student Action -->
+		<record model="ir.actions.act_window" id="action_student_student">
+        	<field name="name">Student</field>
+        	<field name="type">ir.actions.act_window</field>
+        	<field name="res_model">student.student</field>
+	        <field name="view_type">form</field>
+    	    <field name="view_mode">tree,form,graph,calendar</field>
+   		</record>
+
+	<!-- Main Menu -->
+        <menuitem name="Student Management" id="student_main"/>
+    <!-- Main Menu item -->
+		<menuitem name="Students" parent="student_main" id="student_main_item"/>
+	<!-- Main Menu Create items -->
+		<menuitem name="Student" parent="student_main_item" id="student_main_item_create" action="action_student_student"/>
+		<menuitem name="Marksheet" parent="student_main_item" id="student_marksheet_create" action="action_student_select"/>
+		
+    </data>
+</openerp>
