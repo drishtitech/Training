@@ -25,4 +25,4 @@ class idea_report(report_sxw.rml_parse):
     def get_total(self):
         return self.total_vote
                 
-report_sxw.report_sxw('report.idea.information','idea.idea','my_idea/report/report.rml',parser=idea_report)
+report_sxw.report_sxw('report.idea.information','idea.idea','ERP/openerp-7.0/openerp/addons_training/nibedita_my_idea/report/report.rml',parser=idea_report)

@@ -71,12 +71,12 @@ class idea_idea(osv.osv):
     _sql_constraints=[('name','unique(name,creator_id)','the Ideas Summary and creator of the Ideas must be unique!')] 
     
     def _check_open_close_date(self, cr, uid, ids, context=None):
-        for idea in self.read(cr,uid,ids,['creation date','closing_date'],context=None):
-                if idea['creation date'] and idea['closing_date'] and idea['creation date']>idea['closing_date']:
+        for idea in self.read(cr,uid,ids,['creation_date','closing_date'],context=None):
+                if idea['creation_date'] and idea['closing_date'] and idea['creation_date']>idea['closing_date']:
                     return False
         return True
     
-    _constraints=[(_check_open_close_date,'Error!Idea close date time must be greater the open date time.',['creation date','closing_date'])] 
+    _constraints=[(_check_open_close_date,'Error!Idea close date time must be greater the open date time.',['creation_date','closing_date'])] 
     
     def on_change_category(self,cr, uid,ids,category_id,context=None):
         idea_category_obj= self.pool.get('idea.category').browse(cr, uid, category_id, context=context)  
@@ -92,12 +92,12 @@ class idea_idea(osv.osv):
     
     
     def write(self,cr,uid,ids,vals,context=None):
-        if vals.get('creation date', False):
+        if vals.get('creation_date', False):
             vals.update({'opened':True})
         return super(idea_idea,self).write(cr,uid,ids,vals,context=context) 
    
     def wkf_act_idea_opened(self,cr,uid,ids): 
-        self.write(cr,uid,ids,{'state':'open','creation date':time.strftime('%Y-%m-%d')})
+        self.write(cr,uid,ids,{'state':'open','creation_date':time.strftime('%Y-%m-%d')})
         return True
     
     def wkf_act_idea_accepted(self,cr,uid,ids): 

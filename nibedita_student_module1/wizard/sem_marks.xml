@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+ <data>
+  <record id="view_sem_marks" model="ir.ui.view">
+            <field name="name">student.sem.marks.form</field>
+            <field name="model">student.sem.marks</field>
+            <field name="arch" type="xml">
+                <form string="Enter Marks" version="7.0">
+               <group>
+                  <field name='marks' nolabel="1"/>
+               <separator/>
+                   <field name='note' nolabel="1" placeholder="any comment"/>
+               </group>
+               <separator/>
+              <group>
+               <button icon="gtk-ok" name="submit_marks" string="submit" type="object"/>
+               <separator/>
+               <button string="cancel" class="oe_link" special="cancel"/>
+              </group>
+             </form>
+            </field>
+           </record>
+                
+                
+        <record id="view_student_select" model="ir.ui.view">
+            <field name="name">student.select.form</field>
+            <field name="model">student.select</field>
+            <field name="arch" type="xml">
+                <form string="Select students for marks" version="7.0">
+               <group>
+              
+               <separator/>
+              <field name="student_id"/>
+               <group>
+               <button icon="gtk-ok-forward" name="open_marks_form" string="next" type="object"/>
+               <separator/>
+               <button string="close" class="oe_link" special="cancel"/>
+               </group>        
+                
+         </group>       
+        </form>
+       </field>
+      </record> 
+      
+      
+      
+      
+      <record id="action_view_student_sem_marks" model="ir.actions.act_window">
+            <field name="name">submit marks</field>
+   
+            <field name="res_model">student.sem.marks</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_sem_marks"/>
+            <field name="target">new</field>
+           
+      </record>
+       
+      
+      <record id="action_student_select" model="ir.actions.act_window">
+            <field name="name">Student select</field>
+   
+            <field name="res_model">student.select</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_student_select"/>
+            <field name="target">new</field>
+            <field name="context">{'model':'student.student'}</field>
+            
+            
+        </record>
+       
+ </data>
+</openerp>

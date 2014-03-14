@@ -1,0 +1,86 @@
+<openerp>
+	<data>
+		<record model="workflow" id='wkf_student'>
+			<field name="name">student.wkf.basic</field>
+			<field name="osv">student.student</field>
+			<field name="on_create">True</field>
+		</record>
+		<record model="workflow.activity" id='act_student'>
+			<field name="wkf_id" ref="wkf_student"/>
+			<field name="flow_start">True</field>
+			<field name="name">new</field>
+		</record>
+		<record model="workflow.activity" id='act_open'>
+			<field name="wkf_id" ref="wkf_student"/>
+			<field name="name">regular</field>
+			<field name="kind">function</field>
+			<field name="action">wkf_act_student_opened()</field>
+			<field name="flow_stop" eval="False"/>
+			
+		</record>
+		<record model="workflow.activity" id='act_promote'>
+			<field name="wkf_id" ref="wkf_student"/>
+			<field name="name">Passed</field>
+			<field name="kind">function</field>
+			<field name="action">wkf_act_student_promoted()</field>
+			<field name="flow_stop" eval="False"/>
+		</record>
+		<record model="workflow.activity" id='act_next'>
+			<field name="wkf_id" ref="wkf_student"/>
+			<field name="name">next_sem</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'next_semester'})</field>
+			<field name="flow_stop" eval="False"/>
+		</record>
+		
+		
+		<record model="workflow.activity" id='act_failed'>
+			<field name="wkf_id" ref="wkf_student"/>
+			<field name="name">failed</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'fail'})</field>
+			<field name="flow_stop" eval="False"/>
+		</record>
+		<record model="workflow.transition" id='trans_new_open'>
+			<field name="act_from" ref="act_student"/>
+			<field name="act_to" ref="act_open"/>
+			<field name="signal">student_new</field>
+		</record>
+		
+		<record model="workflow.transition" id='trans_open_promote'>
+			<field name="act_from" ref="act_open"/>
+			<field name="act_to" ref="act_promote"/>
+			<field name="signal">student_regular</field>
+		</record>
+		
+		<record model="workflow.transition" id='trans_open_admission'>
+			<field name="act_from" ref="act_promote"/>
+			<field name="act_to" ref="act_next"/>
+			<field name="signal">student_nextsem</field>
+		</record>
+		
+		
+		<record model="workflow.transition" id='trans_open_fail'>
+			<field name="act_from" ref="act_open"/>
+			<field name="act_to" ref="act_failed"/>
+			<field name="signal">student_fail</field>
+			
+		</record>r
+			
+		
+		
+		
+		<record model="workflow.transition" id='trans_readmission_cancelling'>
+			<field name="act_from" ref="act_failed"/>
+			<field name="act_to" ref="act_open"/>
+			<field name="signal">student_readimmited_closing</field>
+		</record>
+		
+		
+		<record model="workflow.transition" id='trans_reopen_closing'>
+			<field name="act_from" ref="act_failed"/>
+			<field name="act_to" ref="act_open"/>
+			<field name="signal">student_reopen_cancelling</field>
+		</record>
+	</data>
+</openerp>
