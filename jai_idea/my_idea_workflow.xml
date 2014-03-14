@@ -63,12 +63,6 @@
 		
 	</record>
 	
-		<record model="workflow.transition" id="tra_refuse_open">
-		<field name="act_from" ref="act_refuse"/>
-		<field name="act_to" ref="act_open"/>
-		<field name="signal">idea_open</field>
-		
-	</record>
 	
 </data>
 </openerp>
