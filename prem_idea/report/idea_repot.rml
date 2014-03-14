@@ -80,7 +80,7 @@
   </stylesheet>
   <story>
     <section>
-      <para style="Standard">[[ repeatIn(objects, 'o') ]]</para>
+      <para style="Standard">[[ repeatIn(objects,'o') ]]</para>
       <para style="Standard">
         <font color="white"> </font>
       </para>

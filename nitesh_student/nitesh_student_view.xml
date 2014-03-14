@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<openerp>
+ <data>
+ 	<!-- FORM view for student.student -->
+ 	<record id='view_student_student_form' model='ir.ui.view'>
+ 		<field name='name'>student.student.form</field>
+ 		<field name='model'>student.student</field>
+ 		<field name='arch' type='xml'>
+ 			<form string='Student form' version='7.0'>
+ 				<header>
+ 					<button name='student_sem2' states='sem1' string='Pass sem1' class='oe_highlight'/>
+ 					<button name='student_sem3' states='sem2' string='Pass sem2' class='oe_highlight'/>
+ 					<button name='student_sem4' states='sem3' string='Pass sem3' class='oe_highlight'/>
+ 					<field name="state" widget="statusbar"/>
+ 				</header>
+ 				<sheet>
+ 					<h1 string='Student name'>
+ 						<field name='name' placeholder='First name          Middle name           Last name'/>
+ 					</h1>
+ 					<seperator/>
+ 				   <group>
+ 					<group>
+ 						<field name='age'/>
+ 						<field name='gender'/>
+ 					</group>
+ 					<group>
+ 						<field name='birth_date' on_change='on_change_birth_date(birth_date,context)'/>
+ 						<field name='admission_date'/>
+ 					</group>
+ 				   </group>
+ 					<notebook>
+ 						<page string='Marksheet details'>
+ 							<group>
+									<button name='%(action_student_fill_marksheet)d' type='action' string='Fill Marksheet'/>
+							</group>
+ 							<field name='marksheet_id' nolabel='1'>
+ 								<tree string='marksheet details tree'>
+ 									<field name='sem_number'/>
+ 									<field name='m_sub1'/>
+ 									<field name='m_sub2'/>
+ 									<field name='m_sub3'/>
+ 									<field name='count_total'/>
+ 									
+ 								</tree>
+ 								
+ 								
+ 								<form string='marksheet details form'>
+ 									<field name='sem_number'/>
+ 									<field name='m_sub1'/>
+ 									<field name='m_sub2'/>
+ 									<field name='m_sub3'/>
+ 								</form>
+ 								
+ 							</field>
+ 						</page>
+ 					
+ 					</notebook>
+ 				</sheet>
+ 			</form>
+ 	   	</field>
+	</record>
+	
+	
+	<!-- TREE view for student.student -->
+ 	<record id='view_student_student_tree' model='ir.ui.view'>
+ 		<field name='name'>student.student.tree</field>
+ 		<field name='model'>student.student</field>
+ 		<field name='arch' type='xml'>
+			<tree string='Student tree'>
+			 	<field name='name'/>
+			 	<field name='age'/>
+			 	<field name='gender'/>
+			 	<field name='birth_date'/>
+				<field name='admission_date'/>
+			</tree>
+		</field>	
+	</record>
+	
+	
+	<!-- CALENDAR view for student.student -->
+ 	<record id='view_student_student_calendar' model='ir.ui.view'>
+ 		<field name='name'>student.student.calendar</field>
+ 		<field name='model'>student.student</field>
+ 		<field name='arch' type='xml'>
+ 			<calendar string="Student calendar"  color='name' date_start='birth_date'>
+ 				<field name='name'/>
+  			</calendar>
+ 		</field>
+ 	</record>
+ 		
+ 		
+ 		
+ 		
+	
+	<!-- ACTION for student.student -->
+	<record id='action_student_student' model='ir.actions.act_window'>
+		<field name='name'>student.student.action</field>
+		<field name='res_model'>student.student</field>
+		<field name='view_type'>form</field>
+		<field name='view_mode'>tree,form,calendar</field>
+	</record>		   	
+ 
+ 
+ 
+ 	<!-- Menu-items -->
+ 	
+ 	<!-- MAIN menu (( Student Application )) -->
+ 	<menuitem id='nitesh_student_main_menu' name='Student Application'/>
+ 
+ 	<!-- main SUB menu  (( Student Application/Students ))-->
+ 	<menuitem id='main_sub_students' name='Students' parent='nitesh_student_main_menu'/>
+ 	
+ 	<!--  SUB menu (( Student Application/Student/Create new student))-->
+ 	<menuitem id='students_sub_create_new_student' name='Create new student' parent='main_sub_students' action='action_student_student'/>
+ 
+ </data>
+</openerp>

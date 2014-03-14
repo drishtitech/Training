@@ -65,7 +65,7 @@ class problem_details(osv.osv):
     def on_change_dept(self,cr,uid,dept_id,context=None):
         #result=[]
         doc_obj = self.pool.get('doctor.details')
-        doctor_records = doc_obj.read(self.cr,self.uid,dept_id,[id])
+        doctor_records = doc_obj.read(cr,self.uid,dept_id,[id])
         print ">>>Doctor Records>>>>>",doctor_records
     
 #Class storing the details about the doctors in the hospital.

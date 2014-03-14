@@ -21,4 +21,4 @@ class idea_report(report_sxw.rml_parse):
     def get_total(self):
         return self.total_vote
         
-report_sxw.report_sxw('report.idea.information','idea.idea','My_idea/report/idea_report.rml',parser=idea_report)
+report_sxw.report_sxw('report.idea.information','idea.idea','Dhananjay_idea/report/idea_report.rml',parser=idea_report)

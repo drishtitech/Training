@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<!--Student view Form View-->
+		<record model="ir.ui.view" id="student_details_form_view">
+			<field name="name">student.details.form</field>
+			<field name="model">student.details</field>
+			<field name="arch" type="xml">
+				<form string="form_view" version="7.0">
+					<sheet>
+					
+					<group>
+						<field name="name" string="Name of Student"/>
+						<field name="id" string="Student ID"/>
+						<field name="gender" string="Gender"/>
+						<field name="birthday" string="Birthday"/>
+						<field name="age" string="Age"/>
+						<field name="admission" string="Admission date"/>
+						<field name="marksheet_id" string="Mark Sheet"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+	<record model="ir.actions.act_window" id="action_on_student_details">
+			<field name="name">Student Details</field>
+			<field name="res_model">student.details</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,calendar</field>			
+	</record>
+	<record id="student_details_calendar" model="ir.ui.view">
+			<field name="name">student.details.calendar</field>
+			<field name="model">student.details</field>
+			<field name="arch" type="xml">
+				<calendar string="Calendar view" color="id" date_start="birthday">
+					<field name="birthday"/>
+				</calendar>
+			</field>
+		</record>
+		<!-- Tree view for student details -->
+    <record model="ir.ui.view" id="student_details_tree">
+			<field name="name">student.details.tree</field>
+			<field name="model">student.details</field>
+			<field name="arch" type="xml">
+				<tree string="tree_view">
+					<field name="name"/>
+					<field name="id" string="Student ID"/>
+					<field name="gender" string="Gender"/>
+					<field name="birthday" string="Birthday"/>
+					<field name="age" string="Age"/>
+					<field name="admission" string="Admission date"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="student_details_search">
+			<field name="name">student.details.search</field>
+			<field name="model">student.details</field>
+			<field name="arch" type="xml">
+				<search string="Search view">
+					<filter string="Male" domain="[('gender','=','male')]" help="Male student"/>
+					<filter string="Female" domain="[('gender','=','female')]" help="Female student"/>
+					<filter string="Student Details" domain="[('id','=',id)]" help="id"/>
+					<field name="name"/>
+						<field name="id"/>
+						<field name="gender"/>
+						<field name="birthday"/>
+						<field name="age"/>
+						<field name="admission"/>
+				</search>
+			</field>
+		</record>
+		
+		
+	<!--Menu bars and menu items-->
+		<menuitem id="student_details_main_menu" name="Student Information"/>
+		
+		<menuitem id="student_details_sub_menu" name="Student" parent="student_details_main_menu" sequence="1"/>
+		<menuitem id="student_details_sub_menu_action_on_student_details" name="Description" parent="student_details_sub_menu" action="action_on_student_details"/>
+	</data>
+</openerp>

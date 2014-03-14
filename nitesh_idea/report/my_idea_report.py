@@ -35,4 +35,4 @@ class idea_report(report_sxw.rml_parse): # rml.parse is by default parser
     #idea.idea is model name
     # then path of rml
     #custom parser we want to use
-report_sxw.report_sxw('report.idea.information','idea.idea','my_idea/report/my_idea_report.rml',parser=idea_report)
+report_sxw.report_sxw('report.idea.information','idea.idea','nitesh_idea/report/my_idea_report.rml',parser=idea_report)

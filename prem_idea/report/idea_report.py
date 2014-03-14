@@ -20,4 +20,4 @@ class idea_report(report_sxw.rml_parse):
             
     def get_total(self):
         return self.total_vote
-report_sxw.report_sxw('report.idea.information','my.idea','/home/drishti/7.0/addons/my_idea/report/idea_repot.rml', parser =idea_report)   
+report_sxw.report_sxw('report.idea.information','my.idea','/home/drishti/ERP/openerp-7.0/openerp/addons_training/prem_idea/report/idea_report.rml', parser =idea_report)   
