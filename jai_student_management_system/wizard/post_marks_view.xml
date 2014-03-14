@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+	<!-- form view to post sem marks of current student -->
+	<record id="view_student_post_marks" model="ir.ui.view">
+		<field name="name">student.post.marks</field>
+		<field name="model">student.post.marks</field>
+		<field name="arch" type="xml">
+			<form string="Enter Marks" version="7.0">
+					<field name="sem_name" nolabel="1" placeholder="Please Select The Semester"/>
+				<group>
+					<field name="marks_java"/>
+					<field name="marks_sql"/>
+					<field name="marks_c"/>
+					
+				</group>
+				
+				<separtor/>
+				<group>
+					<button icon="gtk-ok" name="do_post" string="Insert" type="object"/>
+					<separtor/>
+					<button string="cancel" class="oe_link" special="cancel"/>
+				</group>
+			
+			</form>
+		
+		
+		</field>
+	</record>
+	
+		<!-- action to be executed for the wizard from the idea.idea form views's button -->
+	<record id="action_student_post_marks" model="ir.actions.act_window">
+		<field name="name">Insert Marks</field>
+		<field name="res_model">student.post.marks</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_student_post_marks"/>
+		<field name="target">new</field>
+		</record>
+	
+	
+		
+
+		
+</data>
+</openerp>

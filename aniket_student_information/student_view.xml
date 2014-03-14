@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+   <data>
+      <record id="student_student_form" model="ir.ui.view">
+         <field name="name">student.student.form</field>
+         <field name="model">student.student</field>
+         <field name="type">form</field>
+         <field name="arch" type="xml">
+             <form string="Student" version="7.0">
+                  <group>
+                   <group>
+                    <field name="name"/>
+                    <field name="student_gender"/>
+                    <field name="student_birthdate"/>
+                    <field name="age"/>
+                  </group>
+                   <group>  
+                     <field name="student_name"/>
+                     <field name="addmission_date"/>
+                     <field name="creator_id"/>
+                    
+                   </group>
+                 </group>
+                 <newline/>
+                 <notebook>
+                     <page string="Marksheet">
+                         <field name="student_name" string="Marks Obtained">
+                            <tree>
+                               <field name="marksheet_id"/>
+                               <field name="physics"/>
+                               <field name="chemistry"/>
+                               <field name="maths"/>
+                                
+                            </tree>
+                            <form>
+                               <field name="marksheet_id"/>
+                               <field name="physics"/>
+                               <field name="chemistry"/>
+                               <field name="maths"/>
+                                
+                            </form>
+                         </field>
+                     </page>
+                 </notebook>
+             </form>
+         </field>
+     </record>
+      
+       <record id="marksheet_marksheet_form" model="ir.ui.view">
+         <field name="name">student.marksheet.form</field>
+         <field name="model">student.marksheet</field>
+         <field name="type">form</field>
+         <field name="arch" type="xml">
+             <form string="Marks" version="7.0">
+                  <group>
+                    <field name="physics"/>
+                    <field name="chemistry"/>
+                    <field name="maths"/>
+                  </group>
+                  </form>
+                  </field>
+                  </record>
+                    
+      <record id="student_student_tree" model="ir.ui.view">
+         <field name="name">student.student.tree</field>
+         <field name="model">student.student</field>
+         <field name="arch" type="xml">
+             <tree string="Student">
+                   <field name="name"/>
+                   <field name="student_gender"/>
+                   <field name="student_birthdate"/>
+                   <field name="age"/>
+                   <field name="creator_id"/>
+              </tree>
+       </field>
+       </record>
+       
+       <record id="student_student_calendar" model="ir.ui.view">
+            <field name="name">student.student.calendar</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml"> 
+               <calendar color="creator_id" date_start="student_birthdate" string="CALENDAR">
+                    <field name="name"/>
+               </calendar>
+            </field>
+            </record> 
+                   
+      <record id="student_action_form" model="ir.actions.act_window">
+          <field name="name">Student</field>
+          <field name="res_model">student.student</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form,calendar</field>
+      </record>
+      
+      <menuitem id="student_menu" name="Student"/>
+      <menuitem id="student_menu1" parent="student_menu" name="Student Information"/>
+      <menuitem id="student_menu2" parent="student_menu1" name="Create Student Record" action="student_action_form"/>
+      <menuitem id="student_menu3" parent="student_menu2" name="Marksheet" action="marksheet_marksheet_form"/>
+   </data>
+   </openerp>

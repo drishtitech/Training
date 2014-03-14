@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<!-- this the main menu to access the module- highlighted at the top -->    
+		<menuitem id="main_menu_student_student" name="Student Management" sequence="1"/>
+		
+		<!-- this is the menu inside the module- highlighted at the side  -->
+    	<menuitem id="parent_menu_student_student" name="Student_Details" sequence="1" parent="main_menu_student_student"/>
+    
+    
+    	<!--  Form view of student.student model -->
+        <record id="view_student_student_form" model="ir.ui.view">
+			<field name="name">student.student.form</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <form string="Student" version="7.0">
+                
+		            
+                	<sheet>
+                		<h1><field name="name" placeholder="Enter The Student Name"/></h1>
+                		<group>
+                			<group>
+                				<field name="gender"/>
+                				<field name="birth_date"/>
+                				<field name="age"/>
+                			</group>
+                			<group>
+                				<field name="admission_date"/>
+                			</group>
+                		</group>
+                		<notebook>
+                			<page name="marksheet info">
+                				<group>
+	                   				<button name="%(action_student_post_marks)d" type="action" string="Insert Marks"/>
+	                   			</group>
+                				<field name="marksheet_id" nolabel="1" string="Marksheet">
+		                       		<tree string="Marks Information">
+	                    				<field name="sem_name"/>
+	                    				<field name="marks_java"/>
+	                    				<field name="marks_sql"/>
+	                   				    <field name="marks_c"/>
+	                   				    <field name="marks_total"/>
+	                 				</tree>
+	                 				
+	                    		</field>
+                			</page>
+                		</notebook>
+                		
+                		
+                	</sheet>
+               	</form>
+            </field>
+        </record>
+    
+    
+    	<!-- Kabban view for student.student model -->
+    	<record model="ir.ui.view" id="view_student_student_kanban">
+            <field name="name">student.student.kanabn</field>
+            <field name="model">student.student</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="admission_date" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('idea.idea', 'image', record.id.value)" />
+                                </a>
+                             <div class="oe_product_desc">
+                                  <h4>
+                                      <a type="edit">
+                                          <field name="name"/>
+                                      </a>
+                                  </h4>
+                                    <ul>
+                                        <li><field name="name"/></li>
+                                        <li> <field name="admission_date"/></li>
+                                    </ul>
+                              </div>
+                            </div>
+                      </t>
+                    </templates>
+				</kanban>
+            </field>
+        </record>
+        
+        <!--  form view of student.marksheet model --> 
+          <record id="view_student_marksheet_form" model="ir.ui.view">
+            <field name="name">student.marksheet.form</field>
+            <field name="model">student.marksheet</field>
+            <field name="arch" type="xml">
+                <form string="Marksheet1" version="7.0">
+	                <group>
+    	             	<group  >
+        	         		<field name="student_id"/>
+            	     		<field name="sem_name"/>
+                	 	</group>
+                	</group>
+                 	<group string="Marks Summary">
+                 		<field name="marks_java" />
+                 		<field name="marks_sql"/>
+                 		<field name="marks_c"/>
+                 	</group>
+                 
+                 </form>
+            </field>
+        </record>   
+    	
+       
+    	<!--  action to occur for studen.student module  -->
+     	<record id="action_view_student_student" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="res_model">student.student</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+        </record>
+        
+        <menuitem id="sub_menu1_student_student" name="Student" sequence="1" parent="parent_menu_student_student" action="action_view_student_student"/>
+     
+     
+     </data>
+</openerp>

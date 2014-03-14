@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+ <data>
+	<!-- FORM view for filling marks via button ((direct wizard))-->
+	<record id='view_student_fill_marksheet_form' model='ir.ui.view'>
+		<field name='name'>student.fill.marksheet.form</field>
+		<field name='model'>student.fill.marksheet</field>
+		<field name='arch' type='xml'>
+			<form string='Give VOTE' version='7.0'>
+				<field name='sem_number' />
+				<group>			
+					<field name='mark_sub1' placeholder='marks of maths'/>
+					<field name='mark_sub2' placeholder='marks of C++'/>
+					<field name='mark_sub3' placeholder='marks of java'/>
+				</group>
+				<group>
+					<seperator/>
+					<button name='fill_marks' type='object' string='Fill marks' icon='gtk-ok'/>
+					<seperator/>
+					<button string='Cancel' class='oe_link' special='cancel' /> 
+				</group>
+			</form>
+		</field>	
+	</record>
+	
+	
+	 <!-- Action for filling marksheets via button -->
+ 	<record id='action_student_fill_marksheet' model='ir.actions.act_window'>
+ 		<field name='name'>student.fill.marksheet.action</field>
+ 		<field name='res_model'>student.fill.marksheet</field>
+ 		<field name='view_type'>form</field>
+ 		<field name='view_mode'>form</field>
+ 		<field name='view_id' ref='view_student_fill_marksheet_form'/>
+ 		<field name='target'>new</field>
+	 </record>
+	
+ </data>
+</openerp>
+				
+				
+				

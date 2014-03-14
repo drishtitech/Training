@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+<!--  form view to post vote for current student  -->
+		<record id="view_student_post" model="ir.ui.view">
+			<field name="name">student.post.marksheet</field>
+			<field name="model">post.marksheet</field>
+			<field name="arch" type="xml">
+				<form string="Marksheet" version="7.0">
+				<group>
+				<field name="sem" nolabel="1"/>
+				<separator/>
+				<field name="note" nolabel="1" placeholder="any comment about Marksheet"/>
+				</group>
+				<separtor/>
+				<group>
+				<button icon="gtk-ok" name="do_mark" string="Marksheet" type="object"/>
+				<separtor/>
+				<button string="cancel" class="oe_link" special="cancel"/>
+				</group>
+				</form>
+			</field>
+			</record>
+			
+		<!--
+		 action to be executed for the wizard from the idea.idea form vies's button 
+		-->
+		<record id="action_post_marksheet" model="ir.actions.act_window">
+			<field name="name">action.post.marksheet</field>
+			<field name="res_model">post.marksheet</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_student_post"/>
+			<field name="target">new</field>
+		</record>
+</data>
+</openerp>

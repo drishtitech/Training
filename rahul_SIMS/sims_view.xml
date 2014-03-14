@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<!--STudent details Form View-->
+		<record model="ir.ui.view" id="student_details_form_view">
+			<field name="name">student.details.form</field>
+			<field name="model">student.student</field>
+			<field name="arch" type="xml">
+				<form string="form_view" version="7.0">
+					<header>
+						<button name="sem1_sem2" states="sem1" string="Proceed to Semester 2" class="oe_highlight"/>
+						<button name="sem2_sem3" states="sem2" string="Proceed to Semester 3" class="oe_highlight"/>
+						<button name="sem3_sem4" states="sem3" string="Proceed to Semester 4" class="oe_highlight"/>
+						<field name="state" widget="statusbar"/>
+					</header>
+					<sheet>
+						<group cols="2" colspan="2">
+							<field name="name"/>
+						</group>
+						<group>
+							<group>
+								<field name="street1" placeholder="Street"/>
+								<field name="street2" string=""/>
+								<field name="city" placeholder="City"/>
+								<field name="state_name" placeholder="State"/>
+								<field name="pin_code" placeholder="PIN Code"/>
+								<field name="country" placeholder="Country"/>
+								<field name="email"/>
+								<field name="phone"/>
+							</group>
+							<group>
+								<field name="gender"/>
+								<field name="birth_date"/>
+								<field name="admit_date"/>
+								<field name="age"/>
+							</group>
+						</group>
+						<group string="Marksheet">
+							<group>
+								<button name="%(action_create_marksheet)d" type="action" string="Generate Marksheet"/>
+							</group>
+							<newline/>
+							<field name="marksheet_id" nolabel="1" mode="tree">
+									<!-- Marksheet details tree view in student_details form view -->
+									<tree string="Marksheet">
+										<field name="semester"/>
+										<field name="total"/>
+										<field name="status"/>										
+									</tree>
+									<!-- Vote details form view pop up in my idea form view -->
+									<form string="Marksheet">
+										<group>
+											<field name="semester"/>
+											<field name="subject1"/>
+											<field name="subject2"/>
+											<field name="subject3"/>																															
+										</group>
+									</form>
+								</field>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!--Student details Tree View-->
+		<record model="ir.ui.view" id="student_details_tree_view">
+			<field name="name">student.details.tree</field>
+			<field name="model">student.student</field>
+			<field name="arch" type="xml">
+				<tree string="tree_view" version="7.0">
+					<field name="name"/>
+					<field name="gender"/>
+					<field name="birth_date"/>
+					<field name="admit_date"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		
+		<!-- Student details search view-->
+		<record model="ir.ui.view" id="student_details_search">
+			<field name="name">student.details.search</field>
+			<field name="model">student.student</field>
+			<field name="arch" type="xml">
+				<search string="Search view">
+					<filter string="Semester1" domain="[('state','=','sem1')]" help="Semester1"/>
+					<filter string="Semester2" domain="[('state','=','sem2')]" help="Semester2"/>
+					<filter string="Semester3" domain="[('state','=','sem3')]" help="Semester3"/>
+					<filter string="Semester4" domain="[('state','=','sem4')]" help="Semester4"/>
+					<field name="name"/>
+					<field name="gender"/>
+					<field name="birth_date"/>
+					<field name="admit_date"/>
+					<field name="state"/>
+					<group string="Group By...">						
+						<filter string="Semester" context="{'group_by':'state'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+		
+		<!--Student Details Calendar View-->
+		<record id="student_details_calendar" model="ir.ui.view">
+			<field name="name">student.details.calendar</field>
+			<field name="model">student.student</field>
+			<field name="arch" type="xml">
+				<calendar string="Calendar view" color="name" date_start="birth_date">
+					<field name="name"/>
+				</calendar>
+			</field>
+		</record>
+		
+		<!-- Student Marksheet form view -->
+		
+		
+		<!--Action for student_details-->
+		<record model="ir.actions.act_window" id="action_on_student_details">
+			<field name="name">Student Information</field>
+			<field name="res_model">student.student</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph,calendar</field>			
+		</record>
+		
+		<menuitem id="sims_main_menu" name="SIMS"/>
+		
+		<menuitem id="sims_sub_menu" name="Student" parent="sims_main_menu" sequence="1"/>
+		<menuitem id="sims_sub_menu_action_on_student_details" name="Student Information" parent="sims_sub_menu" action="action_on_student_details"/>
+	</data>
+</openerp>
