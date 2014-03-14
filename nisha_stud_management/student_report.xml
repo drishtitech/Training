@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+ 
+ 		<!-- View for Student report -->
+ 		<report
+ 			id="report_student_student"
+ 			string="Print Student Detail"
+ 			model="student.student"
+ 			name="student.information"
+ 			rml="nisha_stud_management/report/student_report.rml"
+ 			auto="False"
+ 			header="True"/>
+ 	
+    </data>
+</openerp>
