@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+ 
+ 		<!-- Form view of student marks post -->
+ 		<record id="view_student_marks_post" model="ir.ui.view">
+ 			<field name="name">Posting Student Marksheet Form</field>
+ 			<field name="model">student.post.marksheet</field>
+ 			<field name="arch" type="xml">
+ 				<form string="Insert Marks" version="7.0">
+ 					<group>
+ 						<group col="6" colspan="2">
+ 							<field name="sub1_mark"/>
+ 							<field name="sub2_mark"/>
+ 							<field name="sub3_mark"/>
+ 						</group>
+ 						<separator/>
+ 						<field name="comment_mark" nolabel="1" placeholder="Any comments on the Students Performance?"/>	
+ 					</group>
+ 					<separator/>
+ 					<group>
+ 						<button icon="gtk-ok" name="post_marks" string="Insert" type="object"/>
+ 						<separator/>
+ 						<button string='Cancel' class="oe_link" special="cancel"/>
+ 					</group>
+ 				</form>
+ 			</field>
+ 		</record>
+ 		
+ 		<!-- Activity to be performed on inserting Students mark-->
+ 		<record id="action_student_marks_post" model="ir.actions.act_window">
+ 			<field name="name">Insert Marks</field>
+ 			<field name="res_model">student.post.marksheet</field>
+ 			<field name="view_type">form</field>
+ 			<field name="view_mode">form</field>
+ 			<field name="view_id" ref="view_student_marks_post"/>
+ 			<field name="target">new</field>
+ 		</record>
+ 		
+ 		<!-- Form view of Student selection -->
+ 		<record id="view_student_select" model="ir.ui.view">
+ 			<field name="name">Student Select</field>
+ 			<field name="model">student.select</field>
+ 			<field name="arch" type="xml">
+ 				<form string="Insert Marks for Student" version="7.0">
+ 					<group>
+ 						<separator string="Select Student"/>
+ 						<separator/>
+ 						<field name="student_id" nolabel="1"/>	
+ 					</group>
+ 					<separator/>
+ 					<group>
+ 						<button icon="gtk-ok-forward" name="separate_mark_form" string="Next" type="object"/>
+ 						<separator/>
+ 						<button string="Close" class="oe_link" special="cancel"/>
+ 					</group>
+ 				</form>
+ 			</field>
+ 		</record>
+ 		
+ 		<!-- Activity to be performed on student selection -->
+ 		<record id="action_student_select" model="ir.actions.act_window">
+ 			<field name="name">Student Select</field>
+ 			<field name="res_model">student.select</field>
+ 			<field name="view_type">form</field>
+ 			<field name="view_mode">form</field>
+ 			<field name="view_id" ref="view_student_select"/>
+ 			<field name="target">new</field>
+ 			<field name="context">{'model':'student.student'}</field>
+ 		</record>
+ 		
+    </data>
+</openerp>
